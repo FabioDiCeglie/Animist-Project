@@ -1,5 +1,5 @@
 function anime() {
-  return <div>Ciao!</div>;
+  return <div>Ciao Bella!</div>;
 }
 
 export default anime;
