@@ -1,12 +1,10 @@
 import Image from "next/image";
 interface data {
   id: number;
-  attributes: {
-    titles: {
-      en: string;
-    };
-    coverImage: {
-      original: string;
+  title: string;
+  images: {
+    jpg: {
+      image_url: string;
     };
   };
 }
@@ -14,7 +12,7 @@ interface data {
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`https://kitsu.io/api/edge/trending/manga`);
+  const res = await fetch(`https://api.jikan.moe/v4/manga`);
 
   const data = await res.json();
 
@@ -24,15 +22,23 @@ export async function getServerSideProps() {
 
 const Home = ({ mangas }: any) => {
   console.log(mangas);
+
   if (!mangas) {
     return <>Loading</>;
   }
+
   return (
     <div>
       <h1>Trending Manga</h1>
       {mangas.data.map((manga: data) => (
         <div key={manga.id}>
-          <h1>{manga.attributes.titles.en}</h1>
+          <h1>{manga.title}</h1>
+          <img
+            src={manga.images.jpg.image_url}
+            alt={manga.title}
+            width={500}
+            height={500}
+          />
         </div>
       ))}
     </div>
