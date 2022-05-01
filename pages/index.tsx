@@ -1,4 +1,6 @@
-import Image from "next/image";
+import { Fragment } from "react";
+import { Container, Grid, Typography } from "@mui/material";
+
 interface data {
   id: number;
   title: string;
@@ -9,14 +11,10 @@ interface data {
   };
 }
 
-// This gets called on every request
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await fetch(`https://api.jikan.moe/v4/manga`);
-
   const data = await res.json();
 
-  // Pass data to the page via props
   return { props: { mangas: data } };
 }
 
@@ -28,20 +26,24 @@ const Home = ({ mangas }: any) => {
   }
 
   return (
-    <div>
-      <h1>Trending Manga</h1>
-      {mangas.data.map((manga: data) => (
-        <div key={manga.id}>
-          <h1>{manga.title}</h1>
-          <img
-            src={manga.images.jpg.image_url}
-            alt={manga.title}
-            width={500}
-            height={500}
-          />
-        </div>
-      ))}
-    </div>
+    <Container>
+      <Grid container spacing={2}>
+        {mangas.data.map((manga: data) => (
+          <Fragment key={manga.id}>
+            <Grid item xs={8} lg={6}>
+              <Typography variant="h4">{manga.title}</Typography>
+
+              <img
+                src={manga.images.jpg.image_url}
+                alt={manga.title}
+                width={500}
+                height={500}
+              />
+            </Grid>
+          </Fragment>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

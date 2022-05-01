@@ -2,4 +2,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Animist
 
-API: (https://kitsu.docs.apiary.io/#introduction/json:api/pagination)
+API: https://docs.api.jikan.moe/#operation/getMangaPictures
