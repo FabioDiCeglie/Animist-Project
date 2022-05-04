@@ -1,22 +1,15 @@
 import { useState } from "react";
-import {
-  MenuItem,
-  InputLabel,
-  FormControl,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { MenuItem, InputLabel, FormControl } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 interface platform {
   platform: string;
 }
 
 const Platforms = ({ games }: any) => {
-  const [platform, setPlatform] = useState<string>("");
+  const [platform, setPlatform] = useState("");
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setPlatform(event.target.value);
-  };
+  console.log(platform);
 
   let uniquePlatforms = [
     Array.from(
@@ -30,25 +23,35 @@ const Platforms = ({ games }: any) => {
 
   const platforms = uniquePlatforms.flat();
 
+  const handleChange = (event: SelectChangeEvent) => {
+    console.log(event.target);
+    setPlatform(event.target.value as string);
+  };
+
   return (
     <>
-      {" "}
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>Platform</InputLabel>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">
+          Platforms
+        </InputLabel>
         <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
           value={platform}
           onChange={handleChange}
-          autoWidth
-          label="Platform"
+          label="Platforms"
         >
-          <MenuItem value="">None</MenuItem>
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
           {platforms.map((pf: any, i: number) => (
             <div key={i}>
-              <MenuItem value={pf} key={i}>
-                {pf}
-              </MenuItem>
+              <MenuItem value={pf}>{pf}</MenuItem>
             </div>
           ))}
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
     </>

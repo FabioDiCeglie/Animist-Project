@@ -23,11 +23,10 @@ interface data {
   platform: string;
   short_description: string;
   game_url: string;
-  platform: string;
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://www.freetogame.com/api/games?platform=pc`);
+  const res = await fetch(`https://www.freetogame.com/api/games`);
   const data = await res.json();
 
   return { props: { games: data } };
