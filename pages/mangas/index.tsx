@@ -19,7 +19,7 @@ export async function getServerSideProps() {
   return { props: { mangas: data } };
 }
 
-const mangas = ({ mangas }: any) => {
+const Mangas = ({ mangas }: any) => {
   if (!mangas) {
     return <>Loading</>;
   }
@@ -47,4 +47,4 @@ const mangas = ({ mangas }: any) => {
   );
 };
 
-export default mangas;
+export default Mangas;
