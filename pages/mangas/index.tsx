@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Container, Grid, Typography } from "@mui/material";
+import PaginationComponent from "../../components/Pagination";
 
 interface data {
   id: number;
@@ -41,6 +42,7 @@ const mangas = ({ mangas }: any) => {
           </Fragment>
         ))}
       </Grid>
+      <PaginationComponent />
     </Container>
   );
 };

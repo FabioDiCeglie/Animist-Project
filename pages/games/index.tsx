@@ -24,7 +24,6 @@ const games = ({ games }: any) => {
 
   return (
     <Container>
-      <PaginationComponent />
       <Grid container spacing={2}>
         {limitGames.map((game: data) => (
           <Fragment key={game.id}>
@@ -41,6 +40,7 @@ const games = ({ games }: any) => {
           </Fragment>
         ))}
       </Grid>
+      <PaginationComponent />
     </Container>
   );
 };
