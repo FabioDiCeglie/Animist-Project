@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Container, Grid, Typography } from "@mui/material";
+import PaginationComponent from "../../components/Pagination";
 
 interface data {
   id: number;
@@ -23,6 +24,7 @@ const games = ({ games }: any) => {
 
   return (
     <Container>
+      <PaginationComponent />
       <Grid container spacing={2}>
         {limitGames.map((game: data) => (
           <Fragment key={game.id}>
