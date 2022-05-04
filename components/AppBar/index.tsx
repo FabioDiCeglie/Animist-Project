@@ -71,7 +71,7 @@ const TopBar = () => {
                 Mangas
               </Typography>
             </Link>
-            <Link href="/">
+            <Link href="/games">
               <Typography
                 variant="subtitle1"
                 noWrap
