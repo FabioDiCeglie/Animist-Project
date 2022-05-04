@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pagination, Stack, Typography } from "@mui/material";
+import { Pagination, Box } from "@mui/material";
 
 const PaginationComponent = ({ pageNumbers, paginate }: any) => {
   const [page, setPage] = useState<number>(1);
@@ -11,15 +11,14 @@ const PaginationComponent = ({ pageNumbers, paginate }: any) => {
 
   return (
     <>
-      <Typography>Page: {page}</Typography>
-      <Stack spacing={2}>
+      <Box sx={{ mb: 5, display: "flex", justifyContent: "flex-end" }}>
         <Pagination
           count={parseInt(pageNumbers)}
           color="primary"
           page={page}
           onChange={handleChange}
         />
-      </Stack>
+      </Box>
     </>
   );
 };
