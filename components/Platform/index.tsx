@@ -18,11 +18,22 @@ const Platforms = ({ games }: any) => {
     setPlatform(event.target.value);
   };
 
-  //   const platformsGames = games.filter
+  let uniquePlatforms = [
+    Array.from(
+      new Set(
+        games.map((game: platform) => {
+          return game.platform;
+        })
+      )
+    ),
+  ];
+
+  const platforms = uniquePlatforms.flat();
+
   return (
     <>
       {" "}
-      <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel>Platform</InputLabel>
         <Select
           value={platform}
@@ -30,14 +41,14 @@ const Platforms = ({ games }: any) => {
           autoWidth
           label="Platform"
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {/* {games.map((game: platform) => (
-            <>
-              <MenuItem value={game.platform}>{game.platform}</MenuItem>
-            </>
-          ))} */}
+          <MenuItem value="">None</MenuItem>
+          {platforms.map((pf: any, i: number) => (
+            <div key={i}>
+              <MenuItem value={pf} key={i}>
+                {pf}
+              </MenuItem>
+            </div>
+          ))}
         </Select>
       </FormControl>
     </>
