@@ -23,6 +23,7 @@ interface data {
   platform: string;
   short_description: string;
   game_url: string;
+  platform: string;
 }
 
 export async function getServerSideProps() {
@@ -47,7 +48,6 @@ const Games = ({ games }: any) => {
   const indexOfLastGames = currentPage * gamesPerPage;
   const indexOfFirstPost = indexOfLastGames - gamesPerPage;
   const currentGames = games.slice(indexOfFirstPost, indexOfLastGames);
-  console.log(currentGames);
 
   //Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -56,7 +56,7 @@ const Games = ({ games }: any) => {
     <Container sx={{ mt: 5 }}>
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
-        <Platforms />
+        <Platforms games={games} />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (

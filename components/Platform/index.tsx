@@ -7,13 +7,18 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-const Platforms = () => {
+interface platform {
+  platform: string;
+}
+
+const Platforms = ({ games }: any) => {
   const [platform, setPlatform] = useState<string>("");
-  console.log(platform);
 
   const handleChange = (event: SelectChangeEvent) => {
     setPlatform(event.target.value);
   };
+
+  //   const platformsGames = games.filter
   return (
     <>
       {" "}
@@ -28,7 +33,11 @@ const Platforms = () => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Twenty</MenuItem>
+          {/* {games.map((game: platform) => (
+            <>
+              <MenuItem value={game.platform}>{game.platform}</MenuItem>
+            </>
+          ))} */}
         </Select>
       </FormControl>
     </>
