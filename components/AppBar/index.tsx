@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Typography, InputBase, Box, Toolbar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -50,14 +51,36 @@ const TopBar = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
-              Animist
-            </Typography>
+            <Link href="/">
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              >
+                Animist
+              </Typography>
+            </Link>
+            <Link href="/mangas">
+              <Typography
+                variant="subtitle1"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              >
+                Mangas
+              </Typography>
+            </Link>
+            <Link href="/">
+              <Typography
+                variant="subtitle1"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              >
+                Games
+              </Typography>
+            </Link>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

@@ -3,3 +3,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Animist
 
 API: https://docs.api.jikan.moe/#operation/getMangaPictures
+
+API Games: https://www.freetogame.com/api-doc

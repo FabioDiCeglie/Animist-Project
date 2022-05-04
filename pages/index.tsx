@@ -1,49 +1,10 @@
-import { Fragment } from "react";
-import { Container, Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
-interface data {
-  id: number;
-  title: string;
-  images: {
-    jpg: {
-      image_url: string;
-    };
-  };
-}
-
-export async function getServerSideProps() {
-  const res = await fetch(`https://api.jikan.moe/v4/manga`);
-  const data = await res.json();
-
-  return { props: { mangas: data } };
-}
-
-const Home = ({ mangas }: any) => {
-  console.log(mangas);
-
-  if (!mangas) {
-    return <>Loading</>;
-  }
-
+const Home = () => {
   return (
-    <Container>
-      <Grid container spacing={2}>
-        {mangas.data.map((manga: data) => (
-          <Fragment key={manga.id}>
-            <Grid item xs={8} lg={6}>
-              <Typography variant="h4">{manga.title}</Typography>
-
-              <img
-                src={manga.images.jpg.image_url}
-                alt={manga.title}
-                width={500}
-                height={500}
-              />
-            </Grid>
-          </Fragment>
-        ))}
-      </Grid>
-    </Container>
+    <div>
+      <Typography>Ciao</Typography>
+    </div>
   );
 };
 
