@@ -11,7 +11,7 @@ const PaginationComponent = ({ pageNumbers, paginate }: any) => {
 
   return (
     <>
-      <Box sx={{ mb: 5, display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Pagination
           count={parseInt(pageNumbers)}
           color="primary"

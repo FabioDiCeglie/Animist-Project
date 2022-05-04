@@ -14,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import PaginationComponent from "../../components/Pagination";
+import Platforms from "../../components/Platform";
 
 interface data {
   id: number;
@@ -46,14 +47,16 @@ const Games = ({ games }: any) => {
   const indexOfLastGames = currentPage * gamesPerPage;
   const indexOfFirstPost = indexOfLastGames - gamesPerPage;
   const currentGames = games.slice(indexOfFirstPost, indexOfLastGames);
+  console.log(currentGames);
 
   //Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Box>
+      <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
+        <Platforms />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (
