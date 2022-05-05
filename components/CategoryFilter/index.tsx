@@ -38,6 +38,7 @@ const Categories = ({ games, genreSelected }: any) => {
           autoWidth
           label="Genre"
         >
+          <MenuItem value="">All</MenuItem>
           {categories.map((c: any, i: number) => (
             <MenuItem key={i} value={c}>
               {c}

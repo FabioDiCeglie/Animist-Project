@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import axios from "axios";
 import { Fragment, useState, useEffect } from "react";
 import {
   Container,
@@ -24,18 +23,6 @@ export async function getServerSideProps(context: any) {
     throw new Error("Failed to load products from the API");
   }
 
-  // const { genre } = context.query;
-
-  // if (genre !== "All") {
-  //   const res = await fetch(
-  //     `https://www.freetogame.com/api/games?category=${genre}`
-  //   );
-  //   const data = await res.json();
-  //   if (!data) {
-  //     throw new Error("Failed to load products from the API");
-  //   }
-  // }
-
   return { props: { games: data } };
 }
 
@@ -53,12 +40,12 @@ const Games = ({ games }: any) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [gamesPerPage, setGames] = useState<number>(9);
   const [platform, setPlatform] = useState<string>("");
-  const [genre, setGenre] = useState<string>("All");
+  const [genre, setGenre] = useState<string>("");
 
   useEffect(() => {
     setAllGames(games);
 
-    if (genre !== "All") {
+    if (genre !== "") {
       const dataFiltered = games.filter((game: any) => {
         return game.genre.includes(genre);
       });
