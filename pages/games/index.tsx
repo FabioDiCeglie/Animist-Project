@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 import {
   Container,
   Grid,
@@ -63,14 +64,13 @@ const Games = ({ games }: any) => {
     }
 
     // if (sort !== "") {
-    //   console.log(sort);
-    //   const data = async (sort: string) => {
-    //     const res = await fetch(
+    //   const fetchData = async (sort: string) => {
+    //     const data = await axios.get(
     //       `https://www.freetogame.com/api/games?sort-by=${sort}`
     //     );
-    //     setAllGames(res);
+    //     setAllGames(data);
     //   };
-    //   data();
+    //   fetchData(sort);
     // }
   }, [genre, platform]);
 
