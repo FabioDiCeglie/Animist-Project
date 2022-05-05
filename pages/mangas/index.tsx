@@ -39,7 +39,6 @@ const Mangas = ({ mangas }: any) => {
     return <>Loading</>;
   }
 
-  console.log(mangas);
   //PageNumbers
   const pageNumbers = mangas.data.length / mangasPerPage;
 
@@ -53,7 +52,7 @@ const Mangas = ({ mangas }: any) => {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4">Famous mangas</Typography>
+      <Typography variant="h4">Mangas By Animist</Typography>
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
       </Box>

@@ -13,8 +13,9 @@ import {
   Box,
 } from "@mui/material";
 import PaginationComponent from "../../components/Pagination";
-import Platforms from "../../components/Platform";
-import Categories from "../../components/CategoryFilter";
+import Platforms from "../../components/PlatformFilterGames";
+import Categories from "../../components/CategoryFilterGames";
+import Sorting from "../../components/SortingGames";
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(`https://www.freetogame.com/api/games`);
@@ -41,6 +42,8 @@ const Games = ({ games }: any) => {
   const [gamesPerPage, setGames] = useState<number>(9);
   const [platform, setPlatform] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
+  const [sort, setSort] = useState<string>("");
+  console.log(sort);
 
   useEffect(() => {
     setAllGames(games);
@@ -58,6 +61,17 @@ const Games = ({ games }: any) => {
       });
       setAllGames(dataFiltered);
     }
+
+    // if (sort !== "") {
+    //   console.log(sort);
+    //   const data = async (sort: string) => {
+    //     const res = await fetch(
+    //       `https://www.freetogame.com/api/games?sort-by=${sort}`
+    //     );
+    //     setAllGames(res);
+    //   };
+    //   data();
+    // }
   }, [genre, platform]);
 
   if (!allGames) {
@@ -79,13 +93,17 @@ const Games = ({ games }: any) => {
   const platformSelected = (platform: string) => setPlatform(platform);
   //select genre
   const genreSelected = (genre: string) => setGenre(genre);
+  //select sort
+  const sortSelected = (sort: string) => setSort(sort);
 
   return (
     <Container sx={{ mt: 5 }}>
+      <Typography variant="h4">Games By Animist</Typography>
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
         <Platforms games={games} platformSelected={platformSelected} />
         <Categories games={games} genreSelected={genreSelected} />
+        <Sorting sortSelected={sortSelected} />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (

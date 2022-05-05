@@ -61,16 +61,6 @@ const TopBar = () => {
                 Animist
               </Typography>
             </Link>
-            <Link href="/mangas">
-              <Typography
-                variant="subtitle1"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-              >
-                Mangas
-              </Typography>
-            </Link>
             <Link href="/games">
               <Typography
                 variant="subtitle1"
@@ -78,7 +68,17 @@ const TopBar = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
               >
-                Games
+                Games By Animist
+              </Typography>
+            </Link>
+            <Link href="/mangas">
+              <Typography
+                variant="subtitle1"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              >
+                Famous Mangas By Animist
               </Typography>
             </Link>
             <Search>

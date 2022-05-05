@@ -9,8 +9,6 @@ interface platform {
 const Platforms = ({ games, platformSelected }: any) => {
   const [platform, setPlatform] = useState("");
 
-  console.log(platform);
-
   let uniquePlatforms = [
     Array.from(
       new Set(
