@@ -6,10 +6,8 @@ interface platform {
   platform: string;
 }
 
-const Platforms = ({ games }: any) => {
+const Platforms = ({ games, platformSelected }: any) => {
   const [platform, setPlatform] = useState("");
-
-  console.log(platform);
 
   let uniquePlatforms = [
     Array.from(
@@ -24,13 +22,13 @@ const Platforms = ({ games }: any) => {
   const platforms = uniquePlatforms.flat();
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target);
     setPlatform(event.target.value as string);
+    platformSelected(event.target.value as string);
   };
 
   return (
     <>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-standard-label">
           Platforms
         </InputLabel>
@@ -39,19 +37,14 @@ const Platforms = ({ games }: any) => {
           id="demo-simple-select-standard"
           value={platform}
           onChange={handleChange}
+          autoWidth
           label="Platforms"
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {platforms.map((pf: any, i: number) => (
-            <div key={i}>
-              <MenuItem value={pf}>{pf}</MenuItem>
-            </div>
+            <MenuItem key={i} value={pf}>
+              {pf}
+            </MenuItem>
           ))}
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
     </>

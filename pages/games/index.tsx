@@ -4,7 +4,6 @@ import {
   Container,
   Grid,
   Typography,
-  Link,
   Card,
   CardContent,
   CardActionArea,
@@ -15,6 +14,7 @@ import {
 } from "@mui/material";
 import PaginationComponent from "../../components/Pagination";
 import Platforms from "../../components/Platform";
+import { platform } from "os";
 
 interface data {
   id: number;
@@ -27,6 +27,9 @@ interface data {
 
 export async function getServerSideProps() {
   const res = await fetch(`https://www.freetogame.com/api/games`);
+  if (!res) {
+    throw new Error("Failed to load products from the API");
+  }
   const data = await res.json();
 
   return { props: { games: data } };
@@ -35,11 +38,12 @@ export async function getServerSideProps() {
 const Games = ({ games }: any) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [gamesPerPage, setGames] = useState<number>(9);
+  const [platform, setPlatform] = useState<string>("");
 
   if (!games) {
     return <>Loading</>;
   }
-
+  console.log(games);
   //PageNumbers
   const pageNumbers = games.length / gamesPerPage;
 
@@ -51,11 +55,14 @@ const Games = ({ games }: any) => {
   //Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  //select platform
+  const platformSelected = (platform: string) => setPlatform(platform);
+
   return (
     <Container sx={{ mt: 5 }}>
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
-        <Platforms games={games} />
+        <Platforms games={games} platformSelected={platformSelected} />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (
