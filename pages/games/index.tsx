@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useState } from "react";
+import axios from "axios";
+import { Fragment, useState, useEffect } from "react";
 import {
   Container,
   Grid,
@@ -16,6 +17,28 @@ import PaginationComponent from "../../components/Pagination";
 import Platforms from "../../components/Platform";
 import Categories from "../../components/CategoryFilter";
 
+export async function getServerSideProps(context: any) {
+  const res = await fetch(`https://www.freetogame.com/api/games`);
+  const data = await res.json();
+  if (!data) {
+    throw new Error("Failed to load products from the API");
+  }
+
+  // const { genre } = context.query;
+
+  // if (genre !== "All") {
+  //   const res = await fetch(
+  //     `https://www.freetogame.com/api/games?category=${genre}`
+  //   );
+  //   const data = await res.json();
+  //   if (!data) {
+  //     throw new Error("Failed to load products from the API");
+  //   }
+  // }
+
+  return { props: { games: data } };
+}
+
 interface data {
   id: number;
   title: string;
@@ -25,34 +48,42 @@ interface data {
   game_url: string;
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`https://www.freetogame.com/api/games`);
-  if (!res) {
-    throw new Error("Failed to load products from the API");
-  }
-  const data = await res.json();
-
-  return { props: { games: data } };
-}
-
 const Games = ({ games }: any) => {
+  const [allGames, setAllGames] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [gamesPerPage, setGames] = useState<number>(9);
   const [platform, setPlatform] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
-  console.log(genre);
+  const [genre, setGenre] = useState<string>("All");
 
-  if (!games) {
+  useEffect(() => {
+    setAllGames(games);
+
+    if (genre !== "All") {
+      const dataFiltered = games.filter((game: any) => {
+        return game.genre.includes(genre);
+      });
+      setAllGames(dataFiltered);
+    }
+
+    if (platform !== "") {
+      const dataFiltered = games.filter((game: any) => {
+        return game.platform.includes(platform);
+      });
+      setAllGames(dataFiltered);
+    }
+  }, [genre, platform]);
+
+  if (!allGames) {
     return <>Loading</>;
   }
 
   //PageNumbers
-  const pageNumbers = games.length / gamesPerPage;
+  const pageNumbers = allGames.length / gamesPerPage;
 
   //Get current games
   const indexOfLastGames = currentPage * gamesPerPage;
   const indexOfFirstPost = indexOfLastGames - gamesPerPage;
-  const currentGames = games.slice(indexOfFirstPost, indexOfLastGames);
+  const currentGames = allGames.slice(indexOfFirstPost, indexOfLastGames);
 
   //Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -110,5 +141,4 @@ const Games = ({ games }: any) => {
     </Container>
   );
 };
-
 export default Games;

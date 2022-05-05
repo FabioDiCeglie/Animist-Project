@@ -9,6 +9,8 @@ interface platform {
 const Platforms = ({ games, platformSelected }: any) => {
   const [platform, setPlatform] = useState("");
 
+  console.log(platform);
+
   let uniquePlatforms = [
     Array.from(
       new Set(
@@ -40,6 +42,7 @@ const Platforms = ({ games, platformSelected }: any) => {
           autoWidth
           label="Platforms"
         >
+          <MenuItem value="">All</MenuItem>
           {platforms.map((pf: any, i: number) => (
             <MenuItem key={i} value={pf}>
               {pf}
