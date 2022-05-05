@@ -39,6 +39,8 @@ const Games = ({ games }: any) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [gamesPerPage, setGames] = useState<number>(9);
   const [platform, setPlatform] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
+  console.log(genre);
 
   if (!games) {
     return <>Loading</>;
@@ -57,13 +59,15 @@ const Games = ({ games }: any) => {
 
   //select platform
   const platformSelected = (platform: string) => setPlatform(platform);
+  //select genre
+  const genreSelected = (genre: string) => setGenre(genre);
 
   return (
     <Container sx={{ mt: 5 }}>
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
         <Platforms games={games} platformSelected={platformSelected} />
-        <Categories games={games} />
+        <Categories games={games} genreSelected={genreSelected} />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (

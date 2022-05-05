@@ -23,7 +23,7 @@ const Categories = ({ games, genreSelected }: any) => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
-    genreSelected(event.target.value);
+    genreSelected(event.target.value as string);
   };
 
   return (
