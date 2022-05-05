@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import PaginationComponent from "../../components/Pagination";
 import Platforms from "../../components/Platform";
-import { platform } from "os";
+import Categories from "../../components/CategoryFilter";
 
 interface data {
   id: number;
@@ -43,7 +43,7 @@ const Games = ({ games }: any) => {
   if (!games) {
     return <>Loading</>;
   }
-  console.log(games);
+
   //PageNumbers
   const pageNumbers = games.length / gamesPerPage;
 
@@ -63,6 +63,7 @@ const Games = ({ games }: any) => {
       <Box sx={{ mb: 5 }}>
         <PaginationComponent paginate={paginate} pageNumbers={pageNumbers} />
         <Platforms games={games} platformSelected={platformSelected} />
+        <Categories games={games} />
       </Box>
       <Grid container spacing={5}>
         {currentGames.map((game: data) => (
